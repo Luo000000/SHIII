@@ -1,0 +1,50 @@
+export const mockMemos = [
+  {
+    id: '1',
+    title: '周一早会纪要',
+    content: '讨论关于第三季度产品路线图的规划，重点关注 AI 模块的集成与优化，以及用户反馈的修复。',
+    tags: ['工作'],
+    isFavorite: true,
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2),
+    updatedAt: new Date(Date.now() - 1000 * 60 * 60 * 2),
+  },
+  {
+    id: '2',
+    title: '超市购物清单',
+    content: '牛奶、全麦面包、鳄梨、鸡胸肉、洗洁精、垃圾袋。记得带上会员卡。',
+    tags: ['生活'],
+    isFavorite: false,
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24),
+    updatedAt: new Date(Date.now() - 1000 * 60 * 60 * 24),
+  },
+  {
+    id: '3',
+    title: '新应用创意构思',
+    content: '一个专门为极简主义者设计的笔记应用，没有文件夹，只有标签和强大的搜索功能。',
+    tags: ['创意'],
+    isFavorite: false,
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
+    updatedAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
+  },
+  {
+    id: '4',
+    title: '《深度学习》读书笔记',
+    content: '关于反向传播算法的数学推导部分还需要再研读一遍，重点是链式法则的应用。',
+    tags: ['学习'],
+    isFavorite: true,
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5),
+    updatedAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5),
+  },
+];
+
+export const mockUserSettings = {
+  id: '1',
+  name: '张小明',
+  email: 'zhang.xm@example.com',
+  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop',
+  isPro: true,
+  cloudSync: true,
+  darkMode: false,
+  notifications: true,
+  displaySize: 'medium',
+};
