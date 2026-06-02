@@ -13,36 +13,38 @@ export default function RideHistoryPage() {
     <div className="min-h-screen bg-gray-50">
       {/* 顶部导航栏 */}
       <div className="bg-white px-5 pt-12 pb-6 border-b border-gray-100">
-        <div className="flex items-center justify-between mb-6">
-          <div className="w-12 h-12"></div>
-          <div className="text-center">
-            <h1 className="text-xl font-bold text-gray-900">骑行历史</h1>
-          </div>
-          <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
-            <Filter className="w-6 h-6 text-gray-600" />
-          </button>
-        </div>
-
-        {/* 标签选择 */}
-        <div className="flex gap-3 overflow-x-auto pb-2">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                activeTab === tab
-                  ? 'bg-blue-500 text-white shadow-md'
-                  : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              {tab}
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <div className="w-12 h-12"></div>
+            <div className="text-center">
+              <h1 className="text-xl font-bold text-gray-900">骑行历史</h1>
+            </div>
+            <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
+              <Filter className="w-6 h-6 text-gray-600" />
             </button>
-          ))}
+          </div>
+
+          {/* 标签选择 */}
+          <div className="flex gap-3 overflow-x-auto pb-2">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                  activeTab === tab
+                    ? 'bg-blue-500 text-white shadow-md'
+                    : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* 骑行记录列表 */}
-      <div className="px-5 pt-6 pb-32">
+      <div className="px-5 pt-6 pb-32 max-w-4xl mx-auto">
         <div className="space-y-4">
           {mockRideRecords.map((record) => (
             <div

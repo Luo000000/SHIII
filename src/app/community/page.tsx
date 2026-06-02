@@ -14,54 +14,56 @@ export default function CommunityPage() {
     <div className="min-h-screen bg-gray-50">
       {/* 顶部导航栏 */}
       <div className="bg-white px-5 pt-12 pb-6 border-b border-gray-100">
-        <div className="flex items-center justify-between mb-6">
-          <div className="w-12 h-12"></div>
-          <div className="text-center">
-            <h1 className="text-xl font-bold text-gray-900">社区</h1>
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <div className="w-12 h-12"></div>
+            <div className="text-center">
+              <h1 className="text-xl font-bold text-gray-900">社区</h1>
+            </div>
+            <div className="flex items-center gap-3">
+              <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
+                <Search className="w-6 h-6 text-gray-600" />
+              </button>
+              <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
+                <Bell className="w-6 h-6 text-gray-600" />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
-              <Search className="w-6 h-6 text-gray-600" />
+
+          {/* 搜索和发布区域 */}
+          <div className="bg-gray-100 rounded-2xl p-4 flex items-center gap-3 mb-6">
+            <img
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50"
+              alt="用户头像"
+              className="w-10 h-10 rounded-full object-cover"
+            />
+            <input
+              type="text"
+              placeholder="分享你的精彩骑行..."
+              className="flex-1 bg-transparent text-sm text-gray-600 placeholder-gray-400 focus:outline-none"
+            />
+          </div>
+
+          {/* 快捷发布按钮 */}
+          <div className="grid grid-cols-3 gap-4">
+            <button className="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl transition-colors">
+              <Image className="w-6 h-6 text-green-500" />
+              <span className="text-sm text-gray-600">图片</span>
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
-              <Bell className="w-6 h-6 text-gray-600" />
+            <button className="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl transition-colors">
+              <MapPin className="w-6 h-6 text-blue-500" />
+              <span className="text-sm text-gray-600">路线</span>
+            </button>
+            <button className="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl transition-colors">
+              <Zap className="w-6 h-6 text-red-500" />
+              <span className="text-sm text-gray-600">地点</span>
             </button>
           </div>
-        </div>
-
-        {/* 搜索和发布区域 */}
-        <div className="bg-gray-100 rounded-2xl p-4 flex items-center gap-3 mb-6">
-          <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=50"
-            alt="用户头像"
-            className="w-10 h-10 rounded-full object-cover"
-          />
-          <input
-            type="text"
-            placeholder="分享你的精彩骑行..."
-            className="flex-1 bg-transparent text-sm text-gray-600 placeholder-gray-400 focus:outline-none"
-          />
-        </div>
-
-        {/* 快捷发布按钮 */}
-        <div className="grid grid-cols-3 gap-4">
-          <button className="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl transition-colors">
-            <Image className="w-6 h-6 text-green-500" />
-            <span className="text-sm text-gray-600">图片</span>
-          </button>
-          <button className="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl transition-colors">
-            <MapPin className="w-6 h-6 text-blue-500" />
-            <span className="text-sm text-gray-600">路线</span>
-          </button>
-          <button className="flex flex-col items-center gap-2 p-3 hover:bg-gray-50 rounded-xl transition-colors">
-            <Zap className="w-6 h-6 text-red-500" />
-            <span className="text-sm text-gray-600">地点</span>
-          </button>
         </div>
       </div>
 
       {/* 热门话题 */}
-      <div className="px-5 py-4">
+      <div className="px-5 py-4 max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-base font-semibold text-gray-900">热门话题</h3>
           <span className="text-sm text-blue-500 font-medium">全部</span>
@@ -85,7 +87,7 @@ export default function CommunityPage() {
 
       {/* 标签选择 */}
       <div className="bg-white border-b border-gray-100">
-        <div className="flex items-center gap-8 px-5 py-3">
+        <div className="flex items-center gap-8 px-5 py-3 max-w-4xl mx-auto">
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -107,7 +109,7 @@ export default function CommunityPage() {
       </div>
 
       {/* 帖子列表 */}
-      <div className="px-5 py-4 pb-32">
+      <div className="px-5 py-4 pb-32 max-w-4xl mx-auto">
         <div className="space-y-4">
           {mockCommunityPosts.map((post) => (
             <div

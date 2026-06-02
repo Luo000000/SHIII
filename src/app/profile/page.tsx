@@ -12,7 +12,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-gray-50">
       {/* 顶部导航栏 */}
       <div className="bg-white px-5 pt-12 pb-6 border-b border-gray-100">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between max-w-4xl mx-auto">
           <div className="w-12 h-12"></div>
           <div className="text-center">
             <h1 className="text-xl font-bold text-gray-900">个人中心</h1>
@@ -24,7 +24,7 @@ export default function ProfilePage() {
       </div>
 
       {/* 用户信息 */}
-      <div className="px-5 pt-6 pb-32">
+      <div className="px-5 pt-6 pb-32 max-w-4xl mx-auto">
         <div className="text-center mb-6">
           <div className="relative inline-block mb-4">
             <img

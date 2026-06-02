@@ -15,7 +15,7 @@ export default function BottomNav() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 py-3 shadow-lg z-50">
-      <div className="flex justify-around max-w-md mx-auto">
+      <div className="flex justify-around max-w-lg mx-auto">
         <button
           onClick={() => router.push('/')}
           className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all ${

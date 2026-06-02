@@ -7,24 +7,26 @@ export default function RideRecordPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* 顶部导航栏 */}
-      <div className="bg-white px-5 pt-12 pb-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
-            <Zap className="w-6 h-6 text-white" fill="currentColor" />
+      <div className="bg-white px-5 pt-12 pb-4">
+        <div className="flex items-center justify-between max-w-4xl mx-auto">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
+              <Zap className="w-6 h-6 text-white" fill="currentColor" />
+            </div>
           </div>
+          <div className="text-center">
+            <h1 className="text-xl font-bold text-gray-900">实时记录</h1>
+          </div>
+          <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
+            <Settings className="w-6 h-6 text-gray-600" />
+          </button>
         </div>
-        <div className="text-center">
-          <h1 className="text-xl font-bold text-gray-900">实时记录</h1>
-        </div>
-        <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
-          <Settings className="w-6 h-6 text-gray-600" />
-        </button>
       </div>
 
       {/* 主内容区域 */}
-      <div className="px-5 pb-32">
+      <div className="px-5 pb-32 max-w-4xl mx-auto">
         {/* 背景图片 */}
-        <div className="relative rounded-3xl overflow-hidden mb-6" style={{ aspectRatio: '9/16' }}>
+        <div className="relative rounded-3xl overflow-hidden mb-6" style={{ aspectRatio: '16/9' }}>
           <img 
             src="https://images.unsplash.com/photo-1541627866638-5d3736b36b36?w=800" 
             alt="骑行背景" 
