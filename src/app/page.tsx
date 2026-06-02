@@ -1,205 +1,158 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { Plus, Search, Zap, Filter, Heart, Trash2, Clock, MoreHorizontal } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useMemoStore } from '@/store/useMemoStore';
+import React from 'react';
+import { Zap, Settings, Activity, MapPin, Clock, Mountain, Heart, Share2, StopCircle, PlayCircle, Share, Save, Share2 as ShareIcon } from 'lucide-react';
 
-export default function Home() {
-  const router = useRouter();
-  const memos = useMemoStore((state) => state.memos);
-  const selectedTag = useMemoStore((state) => state.selectedTag);
-  const searchQuery = useMemoStore((state) => state.searchQuery);
-  const isLoading = useMemoStore((state) => state.isLoading);
-  const initializeMemos = useMemoStore((state) => state.initializeMemos);
-  const setSelectedTag = useMemoStore((state) => state.setSelectedTag);
-  const setSearchQuery = useMemoStore((state) => state.setSearchQuery);
-  const toggleFavorite = useMemoStore((state) => state.toggleFavorite);
-  const deleteMemo = useMemoStore((state) => state.deleteMemo);
-  const getFilteredMemos = useMemoStore((state) => state.getFilteredMemos);
-
-  useEffect(() => {
-    initializeMemos();
-  }, [initializeMemos]);
-
-  const filteredMemos = getFilteredMemos();
-
-  const ALL_TAGS = ['全部', '工作', '生活', '创意', '学习'];
-
-  const formatDate = (date: Date) => {
-    const now = new Date();
-    const diff = now.getTime() - date.getTime();
-    const oneDay = 24 * 60 * 60 * 1000;
-    
-    if (diff < oneDay && date.getDate() === now.getDate()) {
-      const hours = date.getHours().toString().padStart(2, '0');
-      const minutes = date.getMinutes().toString().padStart(2, '0');
-      return `今天 ${hours}:${minutes}`;
-    } else if (diff < oneDay * 2) {
-      return '昨天';
-    } else {
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      return `${year}年${month}月${day}日`;
-    }
-  };
-
+export default function RideRecordPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* 顶部栏 */}
-      <div className="bg-white border-b border-gray-100 sticky top-0 z-40">
-        <div className="px-5 pt-6 pb-4">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
-                <Zap className="w-6 h-6 text-white" fill="currentColor" />
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* 顶部导航栏 */}
+      <div className="bg-white px-5 pt-12 pb-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
+            <Zap className="w-6 h-6 text-white" fill="currentColor" />
+          </div>
+        </div>
+        <div className="text-center">
+          <h1 className="text-xl font-bold text-gray-900">实时记录</h1>
+        </div>
+        <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
+          <Settings className="w-6 h-6 text-gray-600" />
+        </button>
+      </div>
+
+      {/* 主内容区域 */}
+      <div className="px-5 pb-32">
+        {/* 背景图片 */}
+        <div className="relative rounded-3xl overflow-hidden mb-6" style={{ aspectRatio: '9/16' }}>
+          <img 
+            src="https://images.unsplash.com/photo-1541627866638-5d3736b36b36?w=800" 
+            alt="骑行背景" 
+            className="w-full h-full object-cover"
+          />
+          
+          {/* 数据覆盖层 */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60 flex flex-col justify-end p-6">
+            {/* 速度显示 */}
+            <div className="mb-8">
+              <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 mx-auto w-4/5 shadow-xl">
+                <div className="text-center">
+                  <div className="text-blue-500 font-semibold text-sm mb-1">当前速度</div>
+                  <div className="flex items-baseline justify-center">
+                    <span className="text-6xl font-bold text-gray-900">32.5</span>
+                    <span className="ml-2 text-lg text-gray-600">km/h</span>
+                  </div>
+                  <div className="mt-2 flex items-center justify-center gap-1 text-green-600">
+                    <Activity className="w-4 h-4" />
+                    <span className="font-medium">状态良好</span>
+                  </div>
+                </div>
               </div>
-              <h1 className="text-2xl font-bold text-gray-900">MemoFlow</h1>
             </div>
-            <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors">
-              <Filter className="w-6 h-6 text-gray-600" />
-            </button>
-          </div>
 
-          {/* 搜索栏 */}
-          <div className="relative mb-6">
-            <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="搜索备忘录..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-14 pr-5 py-4 bg-gray-100 rounded-2xl text-lg border-0 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
-            />
-          </div>
+            {/* 数据卡片网格 */}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-white/85 backdrop-blur-md rounded-2xl p-5 text-center shadow-lg">
+                <div className="flex items-center justify-center gap-1 text-gray-600 mb-1">
+                  <MapPin className="w-4 h-4" />
+                  <span className="text-sm font-medium">距离</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900">12.4</div>
+                <div className="text-sm text-gray-600">km</div>
+              </div>
+              
+              <div className="bg-white/85 backdrop-blur-md rounded-2xl p-5 text-center shadow-lg">
+                <div className="flex items-center justify-center gap-1 text-gray-600 mb-1">
+                  <Clock className="w-4 h-4" />
+                  <span className="text-sm font-medium">时长</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900">00:45:12</div>
+              </div>
+              
+              <div className="bg-white/85 backdrop-blur-md rounded-2xl p-5 text-center shadow-lg">
+                <div className="flex items-center justify-center gap-1 text-gray-600 mb-1">
+                  <Mountain className="w-4 h-4" />
+                  <span className="text-sm font-medium">海拔</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900">+245</div>
+                <div className="text-sm text-gray-600">m</div>
+              </div>
+              
+              <div className="bg-white/85 backdrop-blur-md rounded-2xl p-5 text-center shadow-lg">
+                <div className="flex items-center justify-center gap-1 text-gray-600 mb-1">
+                  <Heart className="w-4 h-4" />
+                  <span className="text-sm font-medium">心率</span>
+                </div>
+                <div className="text-3xl font-bold text-red-500">142</div>
+                <div className="text-sm text-gray-600">bpm</div>
+              </div>
+            </div>
 
-          {/* 标签筛选 */}
-          <div className="flex gap-3 overflow-x-auto pb-2">
-            {ALL_TAGS.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setSelectedTag(tag)}
-                className={`px-6 py-3 rounded-full text-base font-medium whitespace-nowrap transition-all ${
-                  selectedTag === tag
-                    ? 'bg-blue-500 text-white shadow-md'
-                    : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
-                }`}
-              >
-                {tag}
+            {/* 实时数据图表 */}
+            <div className="bg-white/85 backdrop-blur-md rounded-2xl p-5 shadow-lg mb-6">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-1">
+                  <Activity className="w-4 h-4 text-blue-500" />
+                  <span className="text-sm font-medium text-gray-900">实时速度记录（最近5分钟）</span>
+                </div>
+                <div className="text-sm text-gray-600">平均: 24.8 km/h</div>
+              </div>
+              
+              {/* 模拟图表 */}
+              <div className="h-24 relative overflow-hidden">
+                <div className="absolute bottom-0 left-0 right-0 h-full">
+                  <svg viewBox="0 0 100 50" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="speedGradient" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path 
+                      d="M0,40 Q10,30 20,35 T40,30 T60,38 T80,32 T100,40 L100,50 L0,50 Z" 
+                      fill="url(#speedGradient)" 
+                    />
+                    <path 
+                      d="M0,40 Q10,30 20,35 T40,30 T60,38 T80,32 T100,40" 
+                      fill="none" 
+                      stroke="#3b82f6" 
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* 控制按钮 */}
+            <div className="flex items-center justify-center gap-6 mb-4">
+              <button className="w-16 h-16 bg-white/90 rounded-full shadow-lg flex items-center justify-center border-2 border-gray-200 hover:bg-gray-50 transition-colors">
+                <StopCircle className="w-8 h-8 text-red-500" />
               </button>
-            ))}
+              
+              <button className="w-20 h-20 bg-amber-500 rounded-full shadow-xl flex items-center justify-center hover:bg-amber-600 transition-colors">
+                <span className="text-4xl font-bold text-white">00</span>
+              </button>
+              
+              <button className="w-16 h-16 bg-white/90 rounded-full shadow-lg flex items-center justify-center border-2 border-blue-500 hover:bg-blue-50 transition-colors">
+                <Share2 className="w-8 h-8 text-blue-500" />
+              </button>
+            </div>
+
+            {/* 底部操作按钮 */}
+            <div className="flex gap-3">
+              <button className="flex-1 flex items-center justify-center gap-2 py-4 bg-white/90 text-blue-500 rounded-xl font-semibold text-base shadow-lg hover:bg-white transition-colors">
+                <Share className="w-5 h-5" />
+                实时位置分享
+              </button>
+              
+              <button className="flex-1 flex items-center justify-center gap-2 py-4 bg-blue-500 text-white rounded-xl font-semibold text-base shadow-lg hover:bg-blue-600 transition-colors">
+                <Save className="w-5 h-5" />
+                保存骑行记录
+              </button>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* 备忘录列表 */}
-      <div className="px-5 pt-6 pb-32">
-        {isLoading ? (
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 animate-pulse"
-              >
-                <div className="h-6 bg-gray-200 rounded w-3/4 mb-3" />
-                <div className="h-4 bg-gray-200 rounded w-full mb-2" />
-                <div className="h-4 bg-gray-200 rounded w-2/3" />
-              </div>
-            ))}
-          </div>
-        ) : filteredMemos.length === 0 ? (
-          <div className="text-center py-24">
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Plus className="w-10 h-10 text-gray-400" />
-            </div>
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">暂无备忘录</h2>
-            <p className="text-gray-500 mb-8">点击下方按钮开始创建第一个备忘录</p>
-            <button
-              onClick={() => router.push('/memo/edit/new')}
-              className="px-8 py-4 bg-blue-500 text-white rounded-xl font-semibold text-lg hover:bg-blue-600 transition-colors"
-            >
-              创建备忘录
-            </button>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {filteredMemos.map((memo) => (
-              <div
-                key={memo.id}
-                onClick={() => router.push(`/memo/${memo.id}`)}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all cursor-pointer"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-semibold text-gray-900 line-clamp-2 flex-1 mr-4">{memo.title}</h3>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 whitespace-nowrap">
-                    <Clock className="w-4 h-4" />
-                    <span>{formatDate(memo.updatedAt)}</span>
-                  </div>
-                </div>
-                
-                <p className="text-gray-600 mb-5 line-clamp-3 whitespace-pre-wrap text-base">
-                  {memo.content}
-                </p>
-                
-                <div className="flex justify-between items-center">
-                  <div className="flex gap-2 flex-wrap">
-                    {memo.tags.slice(0, 2).map((tag, index) => (
-                      <span
-                        key={index}
-                        className="px-4 py-1.5 bg-gray-100 text-gray-600 text-sm rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {memo.tags.length > 2 && (
-                      <span className="px-4 py-1.5 bg-gray-100 text-gray-600 text-sm rounded-full">
-                        +{memo.tags.length - 2}
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div className="flex items-center gap-1">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleFavorite(memo.id);
-                      }}
-                      className={`p-3 rounded-xl hover:bg-gray-100 transition-colors ${
-                        memo.isFavorite ? 'text-red-500' : 'text-gray-400'
-                      }`}
-                    >
-                      <Heart className={`w-6 h-6 ${memo.isFavorite ? 'fill-current' : ''}`} />
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (confirm('确定要删除这个备忘录吗？')) {
-                          deleteMemo(memo.id);
-                        }
-                      }}
-                      className="p-3 rounded-xl hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors"
-                    >
-                      <Trash2 className="w-6 h-6" />
-                    </button>
-                    <button className="p-3 rounded-xl hover:bg-gray-100 text-gray-400 transition-colors">
-                      <MoreHorizontal className="w-6 h-6" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* 浮动添加按钮 */}
-      <button
-        onClick={() => router.push('/memo/edit/new')}
-        className="fixed bottom-36 right-6 w-16 h-16 bg-blue-500 text-white rounded-full shadow-xl flex items-center justify-center hover:bg-blue-600 transition-all hover:scale-105 z-50"
-      >
-        <Plus className="w-8 h-8" />
-      </button>
     </div>
   );
 }

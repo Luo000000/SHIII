@@ -3,8 +3,8 @@ import './globals.css';
 import BottomNav from '@/components/BottomNav';
 
 export const metadata: Metadata = {
-  title: 'MemoFlow - 智能备忘录',
-  description: '简洁优雅的备忘录应用',
+  title: 'RideFlow - 骑行记录',
+  description: '专业的骑行记录与分享应用',
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className="bg-gray-50 min-h-screen">
-        <main>{children}</main>
+        <main className="pb-24">{children}</main>
         <BottomNav />
       </body>
     </html>
